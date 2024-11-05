@@ -10,21 +10,25 @@ class SenderController extends Controller
 {
     public function getSender(Request $request){
         
-        $filter = $request->query->get("filter");
+        $filter = $request->query->get("filter"); //Gather the filter from the query
 
-        if($filter !=null){
+        if($filter !=null){ //If there is a filter then search for the asked sender
             $parsed = json_decode($filter, true);
-            $sender = $parsed["sender"];
+            $sender = $parsed["sender"]; //parsing and getting the query value
             
-            try{
-                return $this->map(Sender::where("sender", "=", $sender)->get()[0]);
+            if($sender == null){ //If query malformed skip and do normal behaviour
+                try{
+                    return $this->map(Sender::where("sender", "=", $sender)->get()[0]); //Send back the user with the choosen name
+                }
+                catch(Exception $exception){
+                    return response(null, 404); //If not foudn 404
+                }
             }
-            catch(Exception $exception){
-                return response(null, 404);
-            }
+            
             
         }
-
+        
+        //Else if no filter just get all sender and send them back formatted 
 
         $senders = Sender::all();
 
@@ -37,7 +41,7 @@ class SenderController extends Controller
         return response()->json($response);
     }
 
-    private function map($sender){
+    private function map($sender){ //Translate the raw db objects into the api format
         $response_sender = [];
         $response_sender["sender"] = $sender->sender;
         $response_sender["_state"] = $sender->_state;
@@ -49,7 +53,7 @@ class SenderController extends Controller
 
     public function getSenderById($id){
         try{
-            return $this->map(Sender::find($id));
+            return $this->map(Sender::find($id)); //find and send sender with id
         }
         catch(Exception $e){
             return response(null, 404);

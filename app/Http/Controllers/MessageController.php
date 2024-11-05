@@ -9,23 +9,26 @@ use Illuminate\Http\Request;
 class MessageController extends Controller
 {
     public function getMessages(Request $request){
-        $filter = $request->query->get("filter");
+        $filter = $request->query->get("filter"); //Get the filter inthe query
 
-        if($filter !=null){
+        if($filter !=null){ //If there is a filter
             $parsed = json_decode($filter, true);
 
-            $sender_id = $parsed["sender._id"];
+            $sender_id = $parsed["sender._id"]; //Decoding and getting the value passed in the filter
             
-            if($sender_id != null){
-                try{
+            if($sender_id != null){ //If the filter is invalid skip
+                try{ 
+                    //Get messages with sender id and send them back
                     $messages = Message::where("sender_id", "=", $sender_id)->get();
                     return response()->json($this->map_all($messages));
                 }
                 catch(Exception $exception){
-                    return response(null, 404);
+                    return response(null, 404); //If it crashes it's that the sender id is not found
                 }
             }   
         }
+
+        //Else if there is not filter get all messages and send them back
 
         $allMessages = Message::all();
 
@@ -33,6 +36,7 @@ class MessageController extends Controller
     }
 
     public function sendMessage(Request $request){
+        //Gathering the request body data and creating an associative array to insert them in the db
         $data = $request["data"];
 
         $message = [
@@ -49,7 +53,7 @@ class MessageController extends Controller
         }
     }
 
-    private function map_all($raw_responses){
+    private function map_all($raw_responses){ //Convert all db raw object to api response format
         $reponse = [];
         foreach($raw_responses as $message) {
             $reponse[] = $this->map($message);
@@ -58,7 +62,7 @@ class MessageController extends Controller
         return $reponse;
     }
 
-    private function map($raw_response){
+    private function map($raw_response){//Convert db raw object to api response format
         $response = [
             "sender" => [
                 "_model" => "senders",
