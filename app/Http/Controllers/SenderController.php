@@ -62,8 +62,13 @@ class SenderController extends Controller
     }
 
     public function addSender(Request $request){
-        $data = $request->all()["data"];
+        try{
+            $data = $request->all()["data"];
 
-        return $this->map(Sender::create($data));
+            return $this->map(Sender::create($data)); //Create a sender with given data
+        }catch(Exception $e){
+            return response(null, 400); //If bad data provider just send back http 400
+        }
+        
     }
 }
