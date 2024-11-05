@@ -14,4 +14,7 @@ Route::get("/content/item/messages", [MessageController::class, "getMessages"]);
 Route::post("/content/item/messages", [MessageController::class, "sendMessage"]);
 
 Route::get("/content/item/senders", [SenderController::class, "getSender"]);
+Route::get("/content/item/senders/{id}", [SenderController::class, "getSenderById"]);
+
+
 Route::post("/content/item/senders", [SenderController::class, "addSender"]);
