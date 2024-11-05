@@ -1,1 +1,1 @@
-secret-token oulala
+$2y$12$LBCMvIayVCIQeVvn5A7XU.0xhCumnUXJlTYXb0J9Uy.2XHiLtGvvu
