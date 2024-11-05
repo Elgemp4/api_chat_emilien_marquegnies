@@ -48,12 +48,18 @@ class SenderController extends Controller
     }
 
     public function getSenderById($id){
-        return $this->returnFormated(Sender::find($id));
+        try{
+            return $this->returnFormated(Sender::find($id));
+        }
+        catch(Exception $e){
+            return response(null, 404);
+        }
+        
     }
 
     public function addSender(Request $request){
         $data = $request->all()["data"];
 
-        Sender::create($data);
+        return $this->returnFormated(Sender::create($data));
     }
 }
