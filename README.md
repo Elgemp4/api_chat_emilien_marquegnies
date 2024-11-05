@@ -1,4 +1,4 @@
-## Installation
+# Installation XAMPP
 
 Afin de pouvoir installer l'api dans xampp il faut suivre les étapes suivantes : 
 
@@ -17,3 +17,7 @@ Afin de pouvoir installer l'api dans xampp il faut suivre les étapes suivantes 
 </VirtualHost>
 ```
 5. Redémarrer apache et vous êtes tout bon ! Vous pouvez maintenant accéder à l'api via l'adress laravel.localhost
+
+# Installation MySQL
+1. Créer une base de donnée nommée `api_message`
+2. Importer le fichier `api_message.sql` dans le base de donnée `api_message`
