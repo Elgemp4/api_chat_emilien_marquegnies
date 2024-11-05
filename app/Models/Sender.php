@@ -16,7 +16,7 @@ class Sender extends Model
         "_state"
     ];
 
-    public function messages() : HasMany{
+    public function messages() : HasMany{ //relation avec les messages
         return $this->hasMany(Message::class);
     }
 }

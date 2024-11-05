@@ -15,14 +15,14 @@ class CheckApiToken
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $api_key = $request->headers->get("api-key");
+        $api_key = $request->headers->get("api-key"); //Getting the api-key from the corresponding header
 
-        $token = file_get_contents(storage_path("../api-key.txt"));
+        $token = file_get_contents(storage_path("../api-key.txt")); //Getting the key from the text file
         
-        if($api_key != $token){
-            return response()->json(["error" => "Permission denied"], 403);
+        if($api_key != $token){ //If incorrect stop here
+            return response()->json(["error" => "Permission denied"], 403); 
         }
 
-        return $next($request);
+        return $next($request); //If api key correcty continuie
     }
 }

@@ -15,7 +15,7 @@ class EnforceJSON
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $request->headers->set("accept", "application/json");
+        $request->headers->set("accept", "application/json"); //ENforce laravel to use json for api call.
         return $next($request);
     }
 }

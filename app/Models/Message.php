@@ -10,13 +10,13 @@ class Message extends Model
 {
     use HasUuids;
 
-    protected $fillable = [
+    protected $fillable = [ //Champs remplissalbe
         "sender_id",
         "content",
         "_state"
     ];
 
-    public function sender() : HasOne {
+    public function sender() : HasOne { //Relation avec le sender
         return $this->hasOne(Sender::class);
     }
 }
