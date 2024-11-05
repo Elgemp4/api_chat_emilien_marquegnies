@@ -17,7 +17,7 @@ class SenderController extends Controller
             $sender = $parsed["sender"];
             
             try{
-                return $this->returnFormated(Sender::where("sender", "=", $sender)->get()[0]);
+                return $this->map(Sender::where("sender", "=", $sender)->get()[0]);
             }
             catch(Exception $exception){
                 return response(null, 404);
@@ -31,13 +31,13 @@ class SenderController extends Controller
         $response = [];
 
         foreach($senders as $sender){
-            $response[] = $this->returnFormated($sender);
+            $response[] = $this->map($sender);
         }
 
         return response()->json($response);
     }
 
-    private function returnFormated($sender){
+    private function map($sender){
         $response_sender = [];
         $response_sender["sender"] = $sender->sender;
         $response_sender["_state"] = $sender->_state;
@@ -49,7 +49,7 @@ class SenderController extends Controller
 
     public function getSenderById($id){
         try{
-            return $this->returnFormated(Sender::find($id));
+            return $this->map(Sender::find($id));
         }
         catch(Exception $e){
             return response(null, 404);
@@ -60,6 +60,6 @@ class SenderController extends Controller
     public function addSender(Request $request){
         $data = $request->all()["data"];
 
-        return $this->returnFormated(Sender::create($data));
+        return $this->map(Sender::create($data));
     }
 }

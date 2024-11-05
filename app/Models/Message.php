@@ -11,9 +11,9 @@ class Message extends Model
     use HasUuids;
 
     protected $fillable = [
-        "id",
-        "sender",
-        "state"
+        "sender_id",
+        "content",
+        "_state"
     ];
 
     public function sender() : HasOne {

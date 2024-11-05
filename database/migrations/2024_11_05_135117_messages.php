@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('messages', function (Blueprint $table) {
             $table->uuid("id")->primary()->autoIncrement();
             $table->uuid("sender_id");
+            $table->text("content");
             $table->foreign("sender_id")->references('id')->on('senders');
             $table->boolean("_state");
             $table->timestamps();
