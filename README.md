@@ -1,7 +1,6 @@
-# Installation XAMPP
+# Installation XAMPP (**Il faut XAMPP avec PHP 8.2**)
 
 Afin de pouvoir installer l'api dans xampp il faut suivre les étapes suivantes : 
-
 1. Depuis le dossier de XAMMP déposer le dossier avec le projet laravel dans le dossier `htdocs`
 2. Dans le panneau de contrôle XAMPP appuyer sur config puis `<browse> [Apache]` afin d'ouvrir l'explorateur de fichier dans le dossier de apache.
 3. Aller dans le dossier `conf` puis le dossier `extra` et ouvrir le fichier `httpd-vhosts.conf`
